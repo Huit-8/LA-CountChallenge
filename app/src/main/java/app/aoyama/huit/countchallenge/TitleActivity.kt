@@ -1,5 +1,6 @@
 package app.aoyama.huit.countchallenge
 
+// Doggy: 不要な import は消したい！
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
