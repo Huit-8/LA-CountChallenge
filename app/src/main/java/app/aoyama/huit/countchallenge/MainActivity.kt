@@ -11,8 +11,17 @@ import app.aoyama.huit.countchallenge.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
+    // Doggy: 定数は以下のように定義できるよ！
+    //  companion object とは何か調べてみても良いかも！
+    companion object {
+        private const val SHARED_PREF = "SharedPref"
+    }
+
+    // Doggy: private を付ける場合と付けない場合の違いを調べてみると良さそう！
     private lateinit var mSoundPool: SoundPool
     private var sound = 0
+
+    // Doggy: 不要なコードは削除しておくと、コードが読みやすくなるよ！
 //
 //    private lateinit var mSoundID: Array<Int?>
 //
@@ -32,7 +41,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater).apply { setContentView(this.root) }
 
-        val pref:SharedPreferences = getSharedPreferences("SharedPref",Context.MODE_PRIVATE)
+        // Doggy: コロンと型名の間はスペースを空けるのが通例になっているよ！
+        // Doggy: コンマの後はスペースを空けるのが通例になっているよ！
+        val pref: SharedPreferences = getSharedPreferences("SharedPref", Context.MODE_PRIVATE)
 
         val previousCount: Int = pref.getInt("COUNT",0)
 
@@ -57,16 +68,14 @@ class MainActivity : AppCompatActivity() {
 
             when(tapCount%2){
                 0 -> binding.tapTextCount.setTextColor(Color.BLUE)
-                1 -> { binding.tapTextCount.setTextColor(Color.RED)
+                1 -> {
+                    // Doggy: 新しいブロックの始めは改行を入れられると良さそう！
+                    binding.tapTextCount.setTextColor(Color.RED)
                     mSoundPool.play(sound, 1.0f, 1.0f, 0, 0, 1.0f)
 //                    if (mSoundID[0] != null){
 //                        mSoundID[0]?.let { it1 -> mSoundPool.play(it1,1.0F,1.0F,0,0,1.0F) }
 //                    }
-
-
-
-
-
+                    // Doggy: 不要な改行を削除するとコードがスッキリするよ！
                 }
 
             }
@@ -74,6 +83,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // Doggy: ここも不要であれば削除しよう！
 //    override fun onResume() {
 //        super.onResume()
 //
@@ -98,7 +108,11 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStop() {
         super.onStop()
-        val pref:SharedPreferences = getSharedPreferences("SharedPref",Context.MODE_PRIVATE)
+        // Doggy: "SharedPref" という文字が2回出てくるね！
+        //  文字列だとタイプミスをしたり、値を変えようとしたらすべての箇所を変更しなければならないので、
+        //  定数にしておくとより良いよ！
+        // val pref:SharedPreferences = getSharedPreferences("SharedPref",Context.MODE_PRIVATE) // 変更前
+        val pref:SharedPreferences = getSharedPreferences(SHARED_PREF,Context.MODE_PRIVATE) // 変更後
 
         val previousCount: Int = tapCount
 
