@@ -41,6 +41,7 @@ class Fragment3 : Fragment() {
         binding = Fragment3Binding.inflate(inflater, container, false)
 
 
+        // Doggy: Fragment における View の操作は onViewCreated で行うので、ぜひ修正してみよう！
         binding.mainButton.setOnClickListener {
             val mainIntent = Intent(activity, MainActivity::class.java)
             startActivity(mainIntent)
